@@ -1,0 +1,41 @@
+#Set file path
+filepath<-("wriet/your/file/path")
+
+#Import data
+setwd(filepath)
+gene_list <- read_excel("placeyourdatain.xls")
+
+#Define sets for diagram 
+S1 <- list$set1
+S2 <- list$set2
+S3 <- list$set2
+S4 <- list$set4
+S5 <- list$set5
+
+
+#Replace NAs
+S1[is.na(S1)] <- ""
+S2[is.na(S2)] <- ""
+S3[is.na(S3)] <- ""
+S4[is.na(S4)] <- ""
+S5[is.na(S5)] <- ""
+
+#Draw the diagram comparing the Different Diagnosis Groups (Max 5)
+V4 <- venn.diagram(list(set1=S1, set2=S2, set3=S3, set4=S4, set5=S5),
+                   lwd =0.5,
+                   lty = rep('solid', 1),
+                   fill = c("red", "green", "orange", "blue", "yellow"),
+                   alpha = c(0.5, 0.5, 0.5, 0.5, 0.5),
+                   filename=NULL,
+                   cex = 1.5,
+                   cat.cex = 1.5,
+                   fontfamily = "sans",
+                   cat.fontface = "bold",
+                   cat.default.pos = "outer",
+                   cat.dist = c(0.1, 0.09, 0.09, 0.08, 0.08))
+
+jpeg("Venn_1.jpg",
+     width = 800, height = 800)
+grid.newpage()
+grid.draw(V4)
+dev.off()
